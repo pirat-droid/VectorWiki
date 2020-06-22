@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <div id="colorlib-main">
+        <section class="ftco-section ftco-no-pt ftco-no-pb">
+            <div class="container">
+                <div class="row d-flex">
+                    <div class="col-lg-8 px-md-5 py-5">
+                        <div class="row pt-md-4">
+                        <ul>
+                            <h1>{% trans "Sign In" %}</h1>
+
+                            <form class="login" method="POST" action="{% url 'account_login' %}">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                {% if redirect_field_value %}
+                                    <input type="hidden" name="{{ redirect_field_name }}"
+                                           value="{{ redirect_field_value }}"/>
+                                {% endif %}
+                                <a class="button secondaryAction"
+                                   href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                                <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+                            </form>
+                        </ul>
+                        </div><!-- END-->
+                    </div>
+{% endblock content %}

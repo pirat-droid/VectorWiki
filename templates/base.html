@@ -1,0 +1,100 @@
+{% load static %}
+{% load account %}
+{% load i18n %}
+{% load account socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+{% include 'include/head.html' %}
+<body>
+
+<div id="colorlib-page">
+    <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+    <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+
+        {% include 'include/mainmenu.html' %}
+
+        {% include 'include/footer.html' %}
+
+    </aside> <!-- END COLORLIB-ASIDE -->
+    <div id="colorlib-main">
+        <section class="ftco-section ftco-no-pt ftco-no-pb">
+            <div class="container">
+                <div class="row d-flex">
+                    {% block content %}
+                    {% endblock content %}
+                    {% include 'include/sidebar.html' %}
+                </div>
+            </div>
+        </section>
+    </div><!-- END COLORLIB-MAIN -->
+</div><!-- END COLORLIB-PAGE -->
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00"/>
+    </svg>
+</div>
+
+<script src="{% static "js/jquery.min.js" %}"></script>
+<script src="{% static "js/jquery-migrate-3.0.1.min.js" %}"></script>
+<script src="{% static "js/popper.min.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+<script src="{% static "js/jquery.easing.1.3.js" %}"></script>
+<script src="{% static "js/jquery.waypoints.min.js" %}"></script>
+<script src="{% static "js/jquery.stellar.min.js" %}"></script>
+<script src="{% static "js/owl.carousel.min.js" %}"></script>
+<script src="{% static "js/jquery.magnific-popup.min.js" %}"></script>
+<script src="{% static "js/aos.js" %}"></script>
+<script src="{% static "js/jquery.animateNumber.min.js" %}"></script>
+<script src="{% static "js/scrollax.min.js" %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="{% static "js/google-map.js" %}"></script>
+<script src="{% static "js/main.js" %}"></script>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModalLogin");
+
+    // Get the button that opens the modal
+    var btn = document.getElementsByClassName("myBtn")
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close");
+
+    // When the user clicks on the button, open the modal
+    function buttonClick(event) {
+        var id = this.getAttribute('data-modal');
+        var modal = document.getElementById(id);
+        modal.style.display = 'block';
+    }
+
+    for (var i = 0; i < btn.length; i++) {
+        btn[i].onclick = buttonClick;
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    function spanClick() {
+        var id = this.getAttribute('data-modal');
+        var modal = document.getElementById(id);
+        modal.style.display = 'none';
+    }
+
+    for (var i = 0; i < span.length; i++) {
+        span[i].onclick = spanClick;
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        var isModal = (' ' + event.target.className + ' ').indexOf(' modal ') > -1;
+        if (isModal) {
+            event.target.style.display = "none";
+        }
+    }
+</script>
+
+
+</body>
+</html>

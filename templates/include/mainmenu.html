@@ -1,0 +1,111 @@
+{% load account %}
+<nav id="colorlib-main-menu" role="navigation">
+
+    {% if user.is_authenticated %}
+        <p> {% user_display user %}
+            <span>|</span>
+            <a href="#" class="myBtn" data-modal="myModal1"> Выйти</a></p>
+        {#    {% else %}#}
+        {#        <p><a href="#" class="myBtn" data-modal="myModal2">Войти </a>#}
+        {#            <span>|</span>#}
+        {#        <a href="#" class="myBtn" data-modal="myModal3">Регистрация</a></p>#}
+        <!-- The Modal -->
+        {#    <div id="myModal2" class="modal">#}
+        {#        <!-- Modal content -->#}
+        {#        <div class="modal-content">#}
+        {#            <div class="modal-header">#}
+        {#                <h4>Войти</h4>#}
+        {#                <span class="close" data-modal="myModal2">&times;</span>#}
+        {#            </div>#}
+        {#            <form action="{% url 'account_login' %}" method="post">#}
+        {#                {% csrf_token %}#}
+        {##}
+        {#                <p><input type="hidden" name="next" value="{{ request.get_full_path }}"/></p>#}
+        {#                <p><input id="id_login" name="login"#}
+        {#                                                                          placeholder="Username or e-mail" type="text"#}
+        {#                                                                          required/></p>#}
+        {#                <p><input id="id_password" name="password"#}
+        {#                                                                   placeholder="Password" type="password" required/></p>#}
+        {#                <p><label for="id_remember">Запомнить меня: </label> <input id="id_remember" name="remember"#}
+        {#                                                                            type="checkbox"/></p>#}
+        {##}
+        {#                <p>#}
+        {#                    <a href="{% url 'account_reset_password' %}">Забыл пароль? </a>#}
+        {#                    <button type="submit">Войти</button>#}
+        {#                </p>#}
+        {##}
+        {#            </form>#}
+        {#        </div>#}
+        {#    </div>#}
+
+        <div id="myModal1" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Выйти</h4>
+                    <span class="close" data-modal="myModal1">&times;</span>
+                </div>
+                <p>Вы уверены, что хотите выйти?</p>
+                <form method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <button type="submit">Выйти</button>
+                </form>
+            </div>
+        </div>
+
+        {#    <div id="myModal3" class="modal">#}
+        {#        <!-- Modal content -->#}
+        {#        <div class="modal-content">#}
+        {#            <div class="modal-header">#}
+        {#                <h4>Регистрация</h4>#}
+        {#                <span class="close" data-modal="myModal3">&times;</span>#}
+        {#            </div>#}
+        {#            <p>Уже есть аккаунт? Тогда пожалуйста#}
+        {#                <a href="{% url 'account_login' %}">Войдите</a></p>#}
+        {#            <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">#}
+        {#                {% csrf_token %}#}
+        {#                <p><input type="text" name="username"#}
+        {#                                                                             placeholder="Имя пользователя"#}
+        {#                                                                             autofocus="autofocus" minlength="5"#}
+        {#                                                                             maxlength="150" required=""#}
+        {#                                                                             id="id_username"></p>#}
+        {#                <p><input type="email" name="email" placeholder="E-mail адрес"#}
+        {#                                                                 required=""#}
+        {#                                                                 id="id_email"></p>#}
+        {#                <p><input type="email" name="email2"#}
+        {#                                                                          placeholder="Подтверждение email адреса"#}
+        {#                                                                          required=""#}
+        {#                                                                          id="id_email2"></p>#}
+        {#                <p><input type="password" name="password1" placeholder="Пароль"#}
+        {#                                                                required="" id="id_password1"></p>#}
+        {#                <p><input type="password" name="password2"#}
+        {#                                                                          placeholder="Пароль (ещё раз)" required=""#}
+        {#                                                                          id="id_password2">#}
+        {#                </p>#}
+        {#                <p>#}
+        {#                    <a href="{% url 'account_reset_password' %}">Забыли проль?  </a><button type="submit">Регистрация</button>#}
+        {#                </p>#}
+        {#            </form>#}
+        {#        </div>#}
+        {#    </div>#}
+
+        <ul>
+
+            <li class="colorlib-active"><a href="{% url 'postmodel_list' %}">Home</a></li>
+            {% for name in view.get_post %}
+                <div class="holder">
+                    <li><a href="{{ name.get_absolute_url }}">{{ name.title }}</a>
+                        <div class="block">
+                            <a href="{% url 'postmodel_update' slug=name.slug %}"><span><i
+                                    class="icon-edit mr-2"></i></span></a>
+                        </div>
+                    </li>
+                </div>
+            {% endfor %}
+            <li><a href="{% url 'postmodel_create' %}">+</a></li>
+        </ul>
+        </nav>
+    {% endif %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div id="colorlib-main">
+			<section class="ftco-section ftco-no-pt ftco-no-pb">
+	    	<div class="container">
+	    		<div class="row d-flex">
+	    			<div class="col-lg-8 px-md-5 py-5">
+	    				<div class="row pt-md-4">
+                            {% for post in postmodel_list %}
+
+                                    <div class="blog-entry ftco-animate d-md-flex">
+                                        <a href="{{ post.get_absolute_url }}" class="img img-2"
+                                           style="background-image: url({% static "images/images.jpg" %});"></a>
+                                        <div class="text text-2 pl-md-4">
+                                            <h3 class="mb-2"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                            </h3>
+                                            <div class="meta-wrap">
+                                                <p class="meta">
+                                                    <a href="{{ post.get_absolute_url }}"><span><i
+                                                            class="icon-calendar mr-2"></i>{{ post.date_update }}</span></a>
+                                                    <a href="{% url 'postmodel_update' slug=post.slug %}"><span><i
+                                                            class="icon-edit mr-2"></i>Редактировать</span></a>
+                                                    <a href="{% url 'postmodel_delete' slug=post.slug %}"><span><i
+                                                            class="icon-delete mr-2"></i>Удалить</span></a>
+                                                </p>
+                                            </div>
+                                            <p class="mb-4"><a
+                                                    href="{{ post.get_absolute_url }}">{{ post.description|truncatechars:50|safe }}</a>
+                                            </p>
+                                            <p><a href="{{ post.get_absolute_url }}" class="btn-custom">Читать <span
+                                                    class="ion-ios-arrow-forward"></span></a></p>
+                                        </div>
+                                    </div>
+                            {% empty %}
+                                <p>Нет не одного поста для отображения</p>
+                            {% endfor %}
+
+			    		</div><!-- END-->
+			    	</div>
+
+{% endblock content %}
+
+{##}
+{#                          {% for post in postmodel_list %}#}
+{#       <p>{{ post.title }}</p>#}
+{#                            {% empty %}#}
+{#                                <p>Нет не одного поста для отображения</p>#}
+{#                            {% endfor %}#}

@@ -1,0 +1,44 @@
+{% if user.is_authenticated %}
+    <div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
+        <div class="sidebar-box pt-md-4">
+            <form action="{% url 'search' %}" method="get" class="d-flex editContent">
+                <input type="search" placeholder="Поиск..." name="q" class="form-control" required="">
+                <button type="submit" class="btn1 btn">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+            </form>
+        </div>
+        <div class="sidebar-box ftco-animate">
+            <a href="{% url 'groupmodel_create' %}"><h5 class="sidebar-heading">Добавить группу</h5></a>
+        </div>
+        {% for group in view.get_phone %}
+            <div class="sidebar-box ftco-animate">
+                <div class="holder">
+                    <h6 class="sidebar-heading">{{ group.name }}</h6>
+                        <div class="block">
+                            <a href="{% url 'groupmodel_update' pk=group.id %}"><span>  <i
+                                    class="icon-edit mr-1"></i></span></a><a
+                                href="{% url 'groupmodel_delete' pk=group.id %}"><span><i class="icon-delete mr-2"></i></span></a>
+                </div>
+            </div>
+            <ul class="categories">
+                {% for phone_number in group.phonemodel_set.all %}
+{#                    <div class="holder">#}
+                    <li>{{ phone_number.name }}
+                        <span> : {{ phone_number.phone }}
+            </span>
+{#                        <div class="block">#}
+                        <a href="{% url 'phonemodel_update' pk=phone_number.id %}"><span>  <i
+                                class="icon-edit mr-1"></i></span></a><a
+                                href="{% url 'phonemodel_delete' pk=phone_number.id %}"><span
+                                style="margin-right: 15px"><i class="icon-delete mr-2"></i></span></a>
+{#                            </div>#}
+                    </li>
+{#                     </div>#}
+                {% endfor %}
+                <li><a href="{% url 'phonemodel_create' %}">+</a></li>
+            </ul>
+            </div>
+        {% endfor %}
+    </div><!-- END COL -->
+{% endif %}
