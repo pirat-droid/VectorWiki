@@ -48,6 +48,7 @@ class PhoneModel(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     name = models.CharField('Имя контакта', max_length=150)
     group = models.ForeignKey(GroupModel, verbose_name='Група контактов', on_delete=models.CASCADE)
+    email = models.EmailField('Email адрес', null=True)
     phone = models.CharField('Номер телефона', max_length=13)
     date_create = models.DateTimeField('Дата создания', auto_now_add=True, blank=True)
     date_update = models.DateTimeField('Дата изменения', auto_now=True, blank=True)
@@ -57,6 +58,6 @@ class PhoneModel(models.Model):
         return f'{self.name} - {self.phone}'
 
     class Meta:
-        verbose_name = 'Телефон'
-        verbose_name_plural = 'Телефоны'
+        verbose_name = 'Контакт'
+        verbose_name_plural = 'Контакты'
 
