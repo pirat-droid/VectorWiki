@@ -1,21 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
     {% load static %}
-    <div id="colorlib-main">
-        <section class="ftco-section ftco-no-pt ftco-no-pb">
-            <div class="container">
-                <div class="row d-flex">
-                    <div class="col-lg-8 px-md-5 py-5">
-                        <div class="row pt-md-4">
-                            <form method="POST">{% csrf_token %}
-                                <h1 class="mb-3">Вы хотите удалить группу "{{ object.name }}"?</h1>
-                                <button type="submit" value="Удалить">Удалить</button>
-                                <a href="{% url 'postmodel_list' %}">
-                                    <button type="button" value="Не удалять">Не удалять</button>
-                                </a>
-                            </form>
+    <div class="col-lg-8 px-md-5 py-5">
+        <div class="row pt-md-4">
+            <form method="POST">{% csrf_token %}
+                <h1 class="mb-3">Вы хотите удалить группу - "{{ object.name }}"?</h1>
+                <button type="submit" value="Удалить">Удалить</button>
+                <a href="{% url 'postmodel_list' %}">
+                    <button type="button" value="Не удалять">Не удалять</button>
+                </a>
+            </form>
 
-                        </div><!-- END-->
-                    </div>
+        </div><!-- END-->
+    </div>
 
 {% endblock content %}
