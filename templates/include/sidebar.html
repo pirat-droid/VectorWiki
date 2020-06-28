@@ -13,31 +13,34 @@
         </div>
         {% for group in view.get_phone %}
             <div class="sidebar-box ftco-animate">
-                <div class="holder">
-                    <h6 class="sidebar-heading">{{ group.name }}</h6>
-                        <div class="block">
-                            <a href="{% url 'groupmodel_update' pk=group.id %}"><span>  <i
-                                    class="icon-edit mr-1"></i></span></a><a
-                                href="{% url 'groupmodel_delete' pk=group.id %}"><span><i class="icon-delete mr-2"></i></span></a>
+                <div class="poster">
+                    <strong>{{ group.name }}</strong>
+                    <div class="descr-group">
+                        <a href="{% url 'groupmodel_delete' pk=group.id %}"><span>  <i
+                                class="icon-delete mr-1"></i></span></a><a
+                            href="{% url 'groupmodel_update' pk=group.id %}"><span><i
+                            class="icon-edit mr-2"></i></span></a>
+                    </div>
                 </div>
-            </div>
-            <ul class="categories">
-                {% for phone_number in group.phonemodel_set.all %}
-{#                    <div class="holder">#}
-                    <li>{{ phone_number.name }}
-                        <span> : {{ phone_number.phone }}
-            </span>
-{#                        <div class="block">#}
-                        <a href="{% url 'phonemodel_update' pk=phone_number.id %}"><span>  <i
-                                class="icon-edit mr-1"></i></span></a><a
-                                href="{% url 'phonemodel_delete' pk=phone_number.id %}"><span
-                                style="margin-right: 15px"><i class="icon-delete mr-2"></i></span></a>
-{#                            </div>#}
-                    </li>
-{#                     </div>#}
-                {% endfor %}
-                <li><a href="{% url 'phonemodel_create' %}">+</a></li>
-            </ul>
+                <ul class="categories">
+                    {% for phone_number in group.phonemodel_set.all %}
+               <div class="poster">
+                        <li>{{ phone_number.name }}
+                            <p>тел.: {{ phone_number.phone }}</p>
+                            {% if phone_number.email != "" %}
+                                <p>email: {{ phone_number.email }}</p>
+                            {% endif %}
+                        <div class="descr">
+                            <a href="{% url 'phonemodel_update' pk=phone_number.id %}"><span>  <i
+                                    class="icon-edit mr-1"></i></span></a><a
+                                    href="{% url 'phonemodel_delete' pk=phone_number.id %}"><span
+                                    style="margin-right: 15px"><i class="icon-delete mr-2"></i></span></a>
+                        </div>
+                        </li>
+                        </div>
+                    {% endfor %}
+                    <li><a href="{% url 'phonemodel_create' %}">+</a></li>
+                </ul>
             </div>
         {% endfor %}
     </div><!-- END COL -->
